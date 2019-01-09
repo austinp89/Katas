@@ -1,0 +1,46 @@
+// 62: Map - `has()` 
+// To do: make all tests pass, leave the assert lines unchanged!
+// Follow the hints of the failure messages!
+
+describe('`map.has()` indicates whether an element with a key exists', function() {
+  it('finds nothing in an empty map', function() {
+    let map = new Map();
+    const hasKey = map.has(void 0);
+    assert.equal(hasKey, false);
+  
+  });// map.has returns false when object is empty
+  
+  it('finds an element by it`s key', function() {
+    let map = new Map([['key', 'VALUE']]);
+    const hasKey = map.has('key');
+    assert.equal(hasKey, true);
+  
+  });// need to pass 'key' into map.has() to return true
+  
+  it('finds `undefined` as key too', function() {
+    let map = new Map([[void 0, 'not defined key']]);
+    const hasUndefinedAsKey = map.has();
+    assert.equal(hasUndefinedAsKey, true);
+  
+  });// map.has() to check for key. Undefined keys count as key too
+  
+  it('does not coerce keys', function() {
+    let map = new Map([['1', 'one']]);
+    const findsStringOne = true;
+    assert.equal(map.has('1'), findsStringOne);
+  
+  }); // put 1 inside '' to return true, map.has('1') needs to search for exact key
+  
+  it('after removal (using `map.delete(<key>)`) it doesnt find the element anymore', function() {
+    let map = new Map([[1, 'one']]);
+    map.delete(1);
+    assert.equal(map.has(1), false);
+  
+  });// added map.delete(1) to show once removed it will not return a key
+  
+  it('adding an item (using `map.set(key, value)`) later will make `has()` return true', function() {
+    let map = new Map();
+    map.set(void 0,1000);
+    assert.equal(map.has(void 0), true);
+  });
+});// adding map.set(void 0,1000) lets assert line have a key to return

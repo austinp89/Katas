@@ -1,0 +1,80 @@
+// 74: String - `endsWith()` 
+// To do: make all tests pass, leave the assert lines unchanged!
+// Follow the hints of the failure messages!
+
+describe('`str.endsWith(searchString)` determines whether `str` ends with `searchString`', function() {
+  const s = 'el fin';
+  describe('the 1st parameter the string to search for', function() {
+    it('can be a character', function() {
+      const doesEndWith = s.endsWith('n');
+      assert.equal(doesEndWith, true);
+    
+    });// endsWith() searches end of string for what you pass into param
+    
+    it('can be a string', function() {
+      const expected = true;
+      assert.equal(s.endsWith('fin'), expected);
+    
+    });// allows string to be passed into search param
+    
+    it('can contain unicode characters', function() {
+      const nuclear = 'NO ☢';
+      assert.equal(nuclear.endsWith('☢'), true);
+    
+    });// allows unicode searching
+    
+    it('a regular expression throws a TypeError', function() {
+      const aRegExp = /the/;
+      assert.throws(() => {''.endsWith(aRegExp)}, TypeError);
+    });
+  });// doesnt except regExp to be used in search
+  
+  describe('the 2nd parameter, the position where the search ends (as if the string was only that long)', function() {
+    it('find "el" at a substring of the length 2', function() {
+      const endPos = 2;
+      assert.equal(s.endsWith('el', endPos), true);
+    
+    });// 2nd param allows a position to be used 
+    
+    it('`undefined` uses the entire string', function() {
+      const _undefined_ = undefined;
+      assert.equal(s.endsWith('fin', _undefined_), true);
+    
+    });// undefined in the position 
+    
+    it('the parameter gets coerced to an integer (e.g. "5" becomes 5)', function() {
+      const position = '5';
+      assert.equal(s.endsWith('fi', position), true);
+    
+    });// '' will be coerced into integers when passed to endsWith()
+    
+    describe('value less than 0', function() {
+      it('returns `true`, when searching for an empty string', function() {
+        const emptyString = '';
+        assert.equal('1'.endsWith(emptyString, -1), true);
+      
+      });// returns true when searching through empty string
+      
+      it('return `false`, when searching for a non-empty string', function() {
+        const notEmpty = ' ';
+        assert.equal('1'.endsWith(notEmpty, -1), false);
+      });
+    });// returns false when searching nothing is found to match param
+  });
+  describe('this functionality can be used on non-strings too', function() {
+    it('e.g. a boolean', function() {
+      let aBool = false;
+      assert.equal(String.prototype.endsWith.call(aBool, 'lse'), true);
+    
+    });// can use booleans
+    
+    it('e.g. a number', function() {
+      let aNumber = 84;
+      assert.equal(String.prototype.endsWith.call(aNumber + 1900, 84), true);
+    });
+    it('also using the position works', function() {
+      const position = 3;
+      assert.equal(String.prototype.endsWith.call(1994, '99', position), true);
+    });
+  });
+});

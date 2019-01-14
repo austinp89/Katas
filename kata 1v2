@@ -2,15 +2,13 @@
 // To do: make all tests pass, leave the asserts unchanged!
 // Follow the hints of the failure messages!
 
-//Template string rules!
-
 describe('A template string, is wrapped in ` (backticks) instead of \' or "', function() {
   describe('by default, behaves like a normal string', function() {
     it('just surrounded by backticks', function() {
       var str = `like a string`;
       assert.equal(str, 'like a string');
     });
-  });
+  }); // `` are for template strings
 
   var x = 42;
   var y = 23;
@@ -19,18 +17,22 @@ describe('A template string, is wrapped in ` (backticks) instead of \' or "', fu
     it('e.g. a simple variable "${x}" just gets evaluated', function() {
       var evaluated = `x=${x}`;
       assert.equal(evaluated, 'x=' + x);
-    });
+    
+    }); // `${}` is syntax for computed varibles inside template string.
+    
     it('multiple variables get evaluated too', function() {
       var evaluated = `${x}+${y}`;
       assert.equal(evaluated, x + '+' + y);
     });
-  });
+  }); // multiple varibles can be computed inside the template string
 
   describe('can evaluate any expression, wrapped inside "${...}"', function() {
     it('all inside "${...}" gets evaluated', function() {
-      var evaluated = `${x+y}`;
+      var evaluated = `${ x + y }`;
       assert.equal(evaluated, x+y);
-    });
+    
+    }); // everything inside `${}` get computed
+    
     it('inside "${...}" can also be a function call', function() {
       function getDomain(){ 
         return document.domain; 
@@ -38,5 +40,6 @@ describe('A template string, is wrapped in ` (backticks) instead of \' or "', fu
       var evaluated = `${ getDomain() }`;
       assert.equal(evaluated, 'tddbin.com');
     });
-  });
+  }); // inside ${} in a template string can contain function calls
 });
+
